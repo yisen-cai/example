@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+
+# set current hookpath
+# git config core.hooksPath githooks
+lines=$( git diff --cached --name-only | wc -l )
+if [ $lines -eq 0 ]; then
+    echo -e $'\033[31mThere are no differences to commit, commit aborted.\033[0m'
+		exit 1
+fi
+
+
+MESSAGE=$(git log -1 --pretty=format:%B)
+
+#------------------------------------------------------------------------------#
+echo "*****Running code formatter******"
+STASH_MESSAGE='pre-commit('$MESSAGE')'
+echo $STASH_MESSAGE
+git stash -q --keep-index -m "$STASH_MESSAGE"
+
+# Running formatter.
+./gradlew :spotlessApply
+
+# Add changes again.
+git add .
+
+# Verify the commit is valid commit.
+# powershell $(git diff --cached --name-only | Measure-Object -line)
+lines=$( git diff --cached --name-only | wc -l )
+if [ $lines -eq 0 ]; then
+    echo -e $'\033[31m\nThere are no differences to commit, commit aborted.\033[0m'
+		exit 1
+fi
+echo $'*****Done with code formatter******\n\n'
+
+
+#------------------------------------------------------------------------------#
+echo "*****Running unit tests******"
+# Saving result lest losing changes.
+git stash -q --keep-index -m $MESSAGE
+
+./gradlew test
+
+status=$?
+
+# Apply back.
+git stash pop -q
+
+echo $'*****Done with unit tests******\n\n'
+exit $status
