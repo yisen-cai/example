@@ -27,7 +27,9 @@ git stash -q --keep-index -m "$STASH_MESSAGE"
 ./gradlew :spotlessApply
 
 # Add changes again.
-git add .
+#echo 'Verify formatted code and commit again.'
+#git status
+#exit 1
 
 # Verify the commit is valid commit.
 # powershell $(git diff --cached --name-only | Measure-Object -line)
