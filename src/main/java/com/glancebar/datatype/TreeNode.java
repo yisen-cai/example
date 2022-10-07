@@ -1,10 +1,13 @@
 package com.glancebar.datatype;
 
+import lombok.Data;
+
 /**
  * TreeNode implementation.
  *
  * @param <T>
  */
+@Data
 public class TreeNode<T> {
   private T val;
   private TreeNode<T> left;
@@ -20,29 +23,5 @@ public class TreeNode<T> {
     this.val = val;
     this.left = left;
     this.right = right;
-  }
-
-  public TreeNode<T> getLeft() {
-    return left;
-  }
-
-  public void setLeft(TreeNode<T> left) {
-    this.left = left;
-  }
-
-  public TreeNode<T> getRight() {
-    return right;
-  }
-
-  public void setRight(TreeNode<T> right) {
-    this.right = right;
-  }
-
-  public T getVal() {
-    return val;
-  }
-
-  public void setVal(T val) {
-    this.val = val;
   }
 }
