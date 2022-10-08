@@ -8,9 +8,9 @@ import java.util.Objects;
 public abstract class TreeTraversal {
 
   /**
-   * Step 1 − Recursively traverse left subtree.<br>
-   * Step 2 − Visit root node. <br>
-   * Step 3 − Recursively traverse right subtree.
+   * Step 1 - Recursively traverse left subtree.<br>
+   * Step 2 - Visit root node. <br>
+   * Step 3 - Recursively traverse right subtree.
    */
   public static <T> List<T> inOrderTraversal(TreeNode<T> root) {
     List<T> elements = Lists.newArrayList();
@@ -19,9 +19,9 @@ public abstract class TreeTraversal {
   }
 
   /**
-   * Step 1 − Visit root node. <br>
-   * Step 2 − Recursively traverse left subtree. <br>
-   * Step 3 − Recursively traverse right subtree.
+   * Step 1 - Visit root node. <br>
+   * Step 2 - Recursively traverse left subtree. <br>
+   * Step 3 - Recursively traverse right subtree.
    */
   public static <T> List<T> preOrderTraversal(TreeNode<T> root) {
     List<T> elements = Lists.newArrayList();
