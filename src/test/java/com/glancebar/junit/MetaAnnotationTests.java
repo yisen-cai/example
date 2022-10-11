@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Test;
 
 public class MetaAnnotationTests {
 
-    @Fast
-    @Test
-    void myFastTest() {
-        // ...
-    }
+  @Fast
+  @Test
+  void myFastTest() {
+    // ...
+  }
 
-    @FastTest
-    void myFastTest1() {
-        // ...
-    }
+  @FastTest
+  void myFastTest1() {
+    // ...
+  }
 }
